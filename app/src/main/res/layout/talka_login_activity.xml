@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+   >
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:background="@color/common_primary_dark_color"
+        android:scaleType="fitXY" />
+
+    <LinearLayout
+        android:id="@+id/quick_login"
+        android:layout_width="@dimen/dp_250"
+        android:layout_height="@dimen/dp_47"
+        android:layout_centerHorizontal="true"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:background="@drawable/login_button"
+        android:layout_above="@id/google_login"
+        android:visibility="visible">
+        <ImageView
+            android:layout_width="@dimen/dp_30"
+            android:layout_height="@dimen/dp_30"
+            android:layout_marginStart="@dimen/dp_50"
+            android:src="@drawable/quick_icon"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_20"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_14"
+            android:text="Quick login"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/google_login"
+        android:layout_width="@dimen/dp_250"
+        android:layout_height="@dimen/dp_47"
+        android:layout_centerHorizontal="true"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:background="@drawable/login_button"
+        android:visibility="visible"
+        android:layout_marginTop="@dimen/dp_30"
+        android:layout_marginBottom="@dimen/dp_50"
+        android:layout_above="@+id/protocol_text">
+        <ImageView
+            android:layout_width="@dimen/dp_30"
+            android:layout_height="@dimen/dp_30"
+            android:layout_marginStart="@dimen/dp_50"
+            android:src="@drawable/google_icon"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_20"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_14"
+            android:text="Google login"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/protocol_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_15"
+        android:layout_marginBottom="@dimen/dp_45"
+        android:layout_alignParentBottom="true"
+        android:gravity="center">
+
+        <CheckBox
+            android:id="@+id/checkBox"
+            style="@style/CheckboxTheme_xieyi"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dp_45"
+            android:checked="true"
+            android:text="@string/login_read_context"
+            android:textColor="#EDCCFF"
+            android:textSize="@dimen/sp_12" />
+
+        <TextView
+            android:id="@+id/yonghu"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/dp_1"
+            android:gravity="center"
+            android:text="@string/login_read_context_user_protocol"
+            android:textColor="#E675B8"
+            android:textSize="@dimen/sp_12" />
+
+        <TextView
+            android:id="@+id/yinsi"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/dp_1"
+            android:gravity="center"
+            android:text="@string/login_read_context_secret_protocol"
+            android:textColor="#E675B8"
+            android:textSize="@dimen/sp_12" />
+    </LinearLayout>
+
+</RelativeLayout>
