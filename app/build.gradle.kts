@@ -219,6 +219,8 @@ dependencies {
     previewImplementation(libs.chucker)
     releaseImplementation(libs.chuckerNoOp)
 
+        implementation("com.blankj:utilcodex:1.31.1")
+
     // 多语种：https://github.com/getActivity/MultiLanguages
     // 悬浮窗：https://github.com/getActivity/EasyWindow
     // 日志输出：https://github.com/getActivity/Logcat
