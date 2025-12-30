@@ -42,9 +42,9 @@ when (serverType) {
         extra["BUGLY_ID"] = "请自行替换 Bugly 上面的 AppId"
         extra["BUGLY_KEY"] = "请自行替换 Bugly 上面的 AppKey"
         extra["HOST_URL"] = if (serverType == SERVER_TYPE_PREVIEW) {
-            "https://www.pre.baidu.com/"
+            "https://testandroid.talka18.com/"
         } else {
-            "https://www.test.baidu.com/"
+            "https://testandroid.talka18.com/"
         }
     }
     SERVER_TYPE_PRODUCT -> {

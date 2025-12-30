@@ -6,8 +6,8 @@ import android.widget.Toast
 import com.hjq.core.ktx.createIntent
 import com.hjq.demo.R
 import com.hjq.demo.app.AppActivity
+import com.hjq.demo.talka.login.TalkaSplashActivity
 import com.hjq.demo.ui.activity.HomeActivity
-import com.hjq.demo.ui.activity.SplashActivity
 
 /**
  *    author : Android 轮子哥
@@ -26,7 +26,7 @@ class RestartActivity : AppActivity() {
         fun restart(context: Context) {
             val intent: Intent = if (true) {
                 // 如果是未登录的情况下跳转到闪屏页
-                context.createIntent(SplashActivity::class.java)
+                context.createIntent(TalkaSplashActivity::class.java)
             } else {
                 // 如果是已登录的情况下跳转到首页
                 context.createIntent(HomeActivity::class.java)

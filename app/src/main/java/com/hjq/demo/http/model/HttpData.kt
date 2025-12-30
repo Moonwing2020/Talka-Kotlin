@@ -44,7 +44,7 @@ open class HttpData<T> {
      * 是否请求成功
      */
     fun isRequestSuccess(): Boolean {
-        return code == 200
+        return code == 1
     }
 
     /**

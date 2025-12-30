@@ -76,7 +76,7 @@
 
         <CheckBox
             android:id="@+id/checkBox"
-            style="@style/CheckboxTheme_xieyi"
+            style="@style/Widget.AppCompat.CompoundButton.CheckBox"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/dp_45"
             android:checked="true"

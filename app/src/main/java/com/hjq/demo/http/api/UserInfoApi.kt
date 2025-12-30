@@ -11,10 +11,25 @@ import com.hjq.http.config.IRequestApi
 class UserInfoApi : IRequestApi {
 
     override fun getApi(): String {
-        return "user/info"
+        return "api/get_user_info"
+    }
+
+    private var user_id: String? = null
+
+    fun setUid(userId: String?){
+        this.user_id = userId
     }
 
     class Bean {
+        private val headimgurl: String? = null
+        private val nickname: String? = null
 
+        fun getNickName(): String?{
+            return nickname
+        }
+
+        fun getHeadImgUrl(): String?{
+            return headimgurl
+        }
     }
 }

@@ -1,18 +1,23 @@
 package com.hjq.demo.talka.login
 
 import com.blankj.utilcode.util.SPUtils
+import com.hjq.base.ktx.startActivity
 import com.hjq.demo.R
 import com.hjq.demo.app.AppActivity
 import com.hjq.demo.http.api.Api
 import com.hjq.demo.http.api.NetCheckApi
 import com.hjq.demo.http.api.UrlCheckApi
+import com.hjq.demo.http.api.UserInfoApi
 import com.hjq.demo.http.model.HttpData
 import com.hjq.demo.ktx.toast
 import com.hjq.demo.other.AppConfig
-import com.hjq.demo.other.Constant
+import com.hjq.demo.talka.ohter.Constant
+import com.hjq.demo.ui.activity.HomeActivity
 import com.hjq.http.EasyConfig
 import com.hjq.http.EasyHttp
 import com.hjq.http.listener.HttpCallbackProxy
+import com.hjq.smallchat.utils.UserDataUtils
+import com.tencent.bugly.crashreport.biz.UserInfoBean
 
 class TalkaSplashActivity : AppActivity() {
 
@@ -20,63 +25,77 @@ class TalkaSplashActivity : AppActivity() {
     lateinit var newest_version : String;
     var passIndex: Int = 0;
 
+    var checkUrlArr : List<String> = ArrayList<String>()
+
     override fun getLayoutId(): Int {
-        TODO("Not yet implemented")
         return R.layout.splash_activity
     }
 
     override fun initView() {
-        TODO("Not yet implemented")
     }
 
     override fun initData() {
-        TODO("Not yet implemented")
+        if (AppConfig.isDebug()){
+            checkUrl(AppConfig.getHostUrl())
+        }else{
+            checkNet()
+        }
     }
-
-
-    private fun checkNet(){
-        EasyHttp.post(this).server(Api.CONST_INIT_URLS)
+    private fun checkNet() {
+        EasyHttp.post(this)
+            .server(Api.CONST_INIT_URLS)
             .api(NetCheckApi().apply {
-                version_name = AppConfig.getVersionName();
+                version_name = AppConfig.getVersionName()
             })
             .request(object : HttpCallbackProxy<HttpData<NetCheckApi.Bean?>>(this) {
                 override fun onHttpSuccess(data: HttpData<NetCheckApi.Bean?>) {
-                    val tmpUrls:ArrayList<String>? = data.getData()?.getUrlLists()
-                    if (tmpUrls != null) {
-                        checkUrl(tmpUrls[passIndex],tmpUrls)
-                    }
+                    // ✅ 核心优化1：抛弃!!断言，纯安全调用，无崩溃风险
+                    // ✅ 核心优化2：let内重命名it，可读性拉满，符合Kotlin最佳实践
+                    data.getData()?.getUrlLists()?.let { urlList ->
+                        checkUrlArr = urlList
+                        // 列表非空才执行校验，从第0个地址开始
+                        if (urlList.isNotEmpty()) {
+                            checkUrl(urlList[passIndex])
+                        } else {
+                            toast(R.string.http_network_error)
+                        }
+                    } ?: toast(R.string.http_network_error) // 地址列表为空时，直接提示网络错误
+                }
+
+                // ✅ 补充优化：新增全局请求失败兜底，原代码缺失，防止接口请求本身失败无响应
+                override fun onHttpFail(throwable: Throwable) {
+                    toast(R.string.http_network_error)
                 }
             })
     }
 
-    private fun getNextPassUrl(urlList:ArrayList<String>): String {
+    private fun getNextPassUrl(): String {
+        // ✅ 核心优化1：判空+边界双重校验，彻底杜绝空指针、数组越界崩溃
+        val urlList = checkUrlArr ?: return ""
         passIndex++
-        if (passIndex >= urlList.size) {
-            return ""
-        }
-        return urlList[passIndex]
+        // ✅ 核心优化2：简化边界判断，用indices更符合Kotlin语法习惯
+        return if (passIndex in urlList.indices) urlList[passIndex] else ""
     }
 
 
-
-    private fun checkUrl(url: String,tmpUrls: ArrayList<String>){
-        EasyHttp.post(this).server(url)
+    private fun checkUrl(url: String) {
+        EasyHttp.post(this)
+            .server(url)
             .api(UrlCheckApi())
             .request(object : HttpCallbackProxy<HttpData<UrlCheckApi.Bean?>>(this) {
                 override fun onHttpSuccess(data: HttpData<UrlCheckApi.Bean?>) {
-                    //地址可以正常访问，将地址设置为全局
+                    // 地址可用，全局配置+跳转首页
                     EasyConfig.getInstance().setServer(url)
                     Api.CONST_MAIN_HOST = url
-//                    HomeActivity.start(this@SplashActivity)
-//                    finish()
                     enterHome()
                 }
 
-                override fun onHttpFail(throwable: Throwable?) {
-                    val nextUrl: String = getNextPassUrl(tmpUrls)
-                    if (nextUrl.isNotEmpty()){
-                        checkUrl(nextUrl,tmpUrls)
-                    }else{
+                override fun onHttpFail(throwable: Throwable) {
+                    // 地址不可用，切换下一个地址重试
+                    val nextUrl = getNextPassUrl()
+                    if (nextUrl.isNotEmpty()) {
+                        checkUrl(nextUrl)
+                    } else {
                         toast(R.string.http_network_error)
                     }
                 }

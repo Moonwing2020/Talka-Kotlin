@@ -68,7 +68,7 @@
 
         <!-- 闪屏页 -->
         <activity
-            android:name=".ui.activity.SplashActivity"
+            android:name=".talka.login.TalkaSplashActivity"
             android:exported="true"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
@@ -87,6 +87,11 @@
         <!-- 引导页 -->
         <activity
             android:name=".ui.activity.GuideActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".talka.login.TalkLoginActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
 
