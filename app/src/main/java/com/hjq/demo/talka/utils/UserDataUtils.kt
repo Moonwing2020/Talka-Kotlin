@@ -2,7 +2,7 @@ package com.hjq.smallchat.utils
 
 import com.blankj.utilcode.util.SPUtils
 import com.hjq.demo.talka.ohter.Constant
-import com.tencent.bugly.crashreport.biz.UserInfoBean
+import com.hjq.demo.talka.ohter.UserInfoBean
 
 object UserDataUtils {
     //缓存全局用户数据对象

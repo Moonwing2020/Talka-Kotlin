@@ -9,6 +9,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.edit
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
+import com.blankj.utilcode.util.DeviceUtils
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.google.gson.reflect.TypeToken
 import com.google.gson.stream.JsonToken
@@ -28,6 +29,7 @@ import com.hjq.demo.other.SmartBallPulseFooter
 import com.hjq.demo.other.TitleBarStyle
 import com.hjq.demo.other.ToastInterceptor
 import com.hjq.demo.other.ToastStyle
+import com.hjq.demo.talka.ohter.Constant
 import com.hjq.gson.factory.GsonFactory
 import com.hjq.gson.factory.ParseExceptionCallback
 import com.hjq.http.EasyConfig
@@ -127,6 +129,8 @@ object InitManager {
         // 友盟统计、登录、分享 SDK
         UmengClient.init(application, AppConfig.isLogEnable())
 
+        Constant.USER_DEVICE_ID = DeviceUtils.getUniqueDeviceId()
+
         // Bugly 异常捕捉
         val builder = BuglyBuilder(AppConfig.getBuglyId(), AppConfig.getBuglyKey())
         builder.debugMode = AppConfig.isDebug()
@@ -160,10 +164,13 @@ object InitManager {
                     params: HttpParams,
                     headers: HttpHeaders) {
                     // 添加全局请求头
-                    headers.put("token", "66666666666")
-                    headers.put("deviceOaid", getDeviceOaid())
+                    //headers.put("token", "66666666666")
+                    headers.put("deviceid", Constant.USER_DEVICE_ID)
                     headers.put("versionName", AppConfig.getVersionName())
                     headers.put("versionCode", AppConfig.getVersionCode().toString())
+                    headers.put("app", "Talka")
+                    headers.put("lang", "en")
+                    headers.put("system","android")
                     // 添加全局请求参数
                     // params.put("6666666", "6666666");
                 }

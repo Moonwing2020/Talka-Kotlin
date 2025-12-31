@@ -12,12 +12,12 @@ import com.hjq.demo.http.model.HttpData
 import com.hjq.demo.ktx.toast
 import com.hjq.demo.other.AppConfig
 import com.hjq.demo.talka.ohter.Constant
+import com.hjq.demo.talka.ohter.UserInfoBean
 import com.hjq.demo.ui.activity.HomeActivity
 import com.hjq.http.EasyConfig
 import com.hjq.http.EasyHttp
 import com.hjq.http.listener.HttpCallbackProxy
 import com.hjq.smallchat.utils.UserDataUtils
-import com.tencent.bugly.crashreport.biz.UserInfoBean
 
 class TalkaSplashActivity : AppActivity() {
 
