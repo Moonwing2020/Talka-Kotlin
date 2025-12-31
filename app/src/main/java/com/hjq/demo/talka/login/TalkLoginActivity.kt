@@ -51,6 +51,7 @@ class TalkLoginActivity: AppActivity() {
                     if (beans?.getStatusLogin() == 2){
                         //进入到注册界面
                         //RegisterActivity.start(mContext?.applicationContext,"")
+                        startActivity(RegisterActivity::class.java)
                         finish()
                     }else{
                         //全局添加请求头
