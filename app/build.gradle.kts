@@ -222,6 +222,9 @@ dependencies {
         implementation("com.blankj:utilcodex:1.31.1")
 
     // 多语种：https://github.com/getActivity/MultiLanguages
+    implementation("com.github.getActivity:MultiLanguages:10.2")
+
+
     // 悬浮窗：https://github.com/getActivity/EasyWindow
     // 日志输出：https://github.com/getActivity/Logcat
     // 工具类：https://github.com/Blankj/AndroidUtilCode

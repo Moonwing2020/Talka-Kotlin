@@ -1,5 +1,6 @@
 package com.hjq.demo.app
 
+import android.content.Context
 import android.content.Intent
 import android.view.View
 import android.view.WindowInsets
@@ -16,6 +17,7 @@ import com.hjq.demo.ktx.toast
 import com.hjq.demo.ui.dialog.common.WaitDialog
 import com.hjq.http.config.IRequestApi
 import com.hjq.http.listener.OnHttpListener
+import com.hjq.language.MultiLanguages
 import com.hjq.umeng.sdk.UmengClient.onActivityResult
 
 /**
@@ -229,5 +231,10 @@ abstract class AppActivity : BaseActivity(), TitleBarAction, ImmersionAction, On
         super.onActivityResult(requestCode, resultCode, data)
         // 友盟回调
         onActivityResult(this, requestCode, resultCode, data)
+    }
+
+    override fun attachBaseContext(newBase: Context?) {
+        // 绑定语种
+        super.attachBaseContext(MultiLanguages.attach(newBase))
     }
 }

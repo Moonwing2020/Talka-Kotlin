@@ -186,4 +186,7 @@ abstract class BaseActivity : AppCompatActivity(), ContextAction,
          */
         fun onActivityResult(resultCode: Int, data: Intent?)
     }
+
+
+
 }

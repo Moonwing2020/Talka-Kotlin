@@ -112,7 +112,7 @@
 
         <!-- 注册页 -->
         <activity
-            android:name=".ui.activity.account.RegisterActivity"
+            android:name=".talka.login.TalkaRegisterActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />

@@ -6,7 +6,9 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:orientation="vertical"
-    tools:context=".talka.login.RegisterActivity">
+    android:supportsRtl="true"
+    android:textDirection="rtl"
+    tools:context=".talka.login.TalkaRegisterActivity">
 
     <com.hjq.bar.TitleBar
         android:id="@+id/title"
@@ -32,6 +34,7 @@
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:text="@string/upload_img"
+        android:layout_marginHorizontal="@dimen/dp_25"
         android:textColor="#FF999999" />
 
     <EditText
@@ -44,12 +47,12 @@
         android:background="@drawable/shape_gray_text"
         android:hint="@string/nickname"
         android:maxLength="20"
-        android:paddingStart="@dimen/dp_20"
+        android:paddingHorizontal="@dimen/dp_20"
         android:textColor="@color/font_333333"
         android:textCursorDrawable="@drawable/edit_cursor_color"
         android:textSize="14sp" />
 
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/rl_data"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -68,16 +71,23 @@
             android:paddingStart="@dimen/dp_40"
             android:paddingRight="@dimen/dp_30"
             android:textColor="@color/font_333333"
-            android:textSize="@dimen/sp_14" />
+            android:textSize="@dimen/sp_14"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
+            android:src="@drawable/rili"
             android:layout_marginStart="@dimen/dp_10"
-            android:src="@drawable/rili" />
-    </RelativeLayout>
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/birthday_value"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <RelativeLayout
         android:id="@+id/sex_data"
@@ -105,8 +115,10 @@
             android:id="@+id/mSexRadioGroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
+            android:layout_marginStart="15dp"
             android:layout_marginRight="15dp"
             android:orientation="horizontal">
 
@@ -123,7 +135,7 @@
                 android:id="@+id/btnFeMale"
                 android:layout_width="wrap_content"
                 android:layout_height="25dp"
-                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
                 android:button="@null"
                 android:checked="false"
                 android:drawableRight="@drawable/selector_sex_female" />

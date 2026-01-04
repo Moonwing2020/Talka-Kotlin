@@ -1,10 +1,13 @@
 package com.hjq.demo.app
 
 import android.app.Application
+import android.content.Context
 import com.hjq.core.manager.ActivityManager
 import com.hjq.demo.aop.Log
 import com.hjq.demo.http.glide.GlideApp
 import com.hjq.demo.manager.InitManager
+import com.hjq.language.MultiLanguages
+import com.hjq.smallchat.utils.LanguageSetUtils
 
 /**
  *    author : Android 轮子哥
@@ -27,6 +30,9 @@ class AppApplication : Application() {
         if (InitManager.isAgreePrivacy(this)) {
             InitManager.initSdk(this)
         }
+
+        MultiLanguages.init(this);
+        LanguageSetUtils.setDefaultLanguageCode(this)
     }
 
     override fun onLowMemory() {
@@ -39,5 +45,12 @@ class AppApplication : Application() {
         super.onTrimMemory(level)
         // 根据手机内存剩余情况清理图片内存缓存
         GlideApp.get(this).onTrimMemory(level)
+    }
+
+
+
+    override fun attachBaseContext(base: Context?) {
+        // 绑定语种
+        super.attachBaseContext(MultiLanguages.attach(base))
     }
 }

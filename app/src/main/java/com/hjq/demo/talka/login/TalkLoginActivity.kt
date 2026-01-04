@@ -8,13 +8,10 @@ import com.hjq.demo.R
 import com.hjq.demo.aop.SingleClick
 import com.hjq.demo.app.AppActivity
 import com.hjq.demo.http.model.HttpData
-import com.hjq.demo.ui.activity.HomeActivity
-import com.hjq.http.EasyConfig
 import com.hjq.http.EasyHttp
 import com.hjq.http.listener.HttpCallbackProxy
 import com.hjq.smallchat.http.api.QuickLoginApi
 import com.hjq.smallchat.utils.AESEncrypt
-import com.hjq.smallchat.utils.UserDataUtils
 
 class TalkLoginActivity: AppActivity() {
     private val quickLogin: LinearLayout? by lazy { findViewById(R.id.quick_login) }
@@ -25,6 +22,7 @@ class TalkLoginActivity: AppActivity() {
     }
 
     override fun initView() {
+        setOnClickListener(quickLogin)
     }
 
     override fun initData() {
@@ -48,19 +46,20 @@ class TalkLoginActivity: AppActivity() {
                 override fun onHttpSuccess(data: HttpData<String?>) {
                     val tmpData: String = AESEncrypt.decrypt(data.getData())
                     val beans: QuickLoginApi.Bean? = GsonUtils.fromJson(tmpData,QuickLoginApi.Bean::class.java)
-                    if (beans?.getStatusLogin() == 2){
-                        //进入到注册界面
-                        //RegisterActivity.start(mContext?.applicationContext,"")
-                        startActivity(RegisterActivity::class.java)
-                        finish()
-                    }else{
-                        //全局添加请求头
-                        EasyConfig.getInstance().addHeader("token",beans?.getToken())
-                        //更新用户缓存信息
-                        UserDataUtils.updateUserData(beans?.getToken(),beans?.getId())
-                        startActivity(HomeActivity::class.java)
-                        finish()
-                    }
+//                    if (beans?.getStatusLogin() == 2){
+//                        //进入到注册界面
+//                        //RegisterActivity.start(mContext?.applicationContext,"")
+//                        startActivity(RegisterActivity::class.java)
+//                        finish()
+//                    }else{
+//                        //全局添加请求头
+//                        EasyConfig.getInstance().addHeader("token",beans?.getToken())
+//                        //更新用户缓存信息
+//                        UserDataUtils.updateUserData(beans?.getToken(),beans?.getId())
+//                        startActivity(HomeActivity::class.java)
+//                        finish()
+//                    }
+                    startActivity(TalkaRegisterActivity::class.java)
                 }
 
                 override fun onHttpFail(throwable: Throwable) {
