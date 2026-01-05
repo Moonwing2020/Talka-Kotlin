@@ -22,11 +22,9 @@ import com.hjq.demo.aop.Log
 import com.hjq.demo.aop.SingleClick
 import com.hjq.demo.app.AppActivity
 import com.hjq.demo.http.api.GetCodeApi
-import com.hjq.demo.http.api.RegisterApi
 import com.hjq.demo.http.model.HttpData
 import com.hjq.demo.ktx.toast
 import com.hjq.http.EasyHttp
-import com.hjq.http.config.IRequestApi
 import com.hjq.http.listener.HttpCallbackProxy
 
 /**

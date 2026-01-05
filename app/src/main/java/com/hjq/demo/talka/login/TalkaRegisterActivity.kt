@@ -56,7 +56,7 @@ class TalkaRegisterActivity : AppActivity(){
 
     private val btSend: TextView by lazyFindViewById(R.id.btn_ok)
 
-    var sexIndex : Int  = 0; //  1 男 2 女
+    var sexIndex : Int  = 0 //  1 男 2 女
 
     private var nameStr : String = ""
 
@@ -104,7 +104,7 @@ class TalkaRegisterActivity : AppActivity(){
     }
 
     override fun initData() {
-        sexRadioButton?.setOnCheckedChangeListener { group, checkedId ->
+        sexRadioButton?.setOnCheckedChangeListener { _, checkedId ->
             when(checkedId){
                 R.id.btnMale -> {
                     sexIndex = 1
@@ -244,7 +244,7 @@ class TalkaRegisterActivity : AppActivity(){
         ImageSelectActivity.start(this, object : ImageSelectActivity.OnImageSelectListener {
             override fun onSelected(data: MutableList<String>) {
 
-                imgPath = data[0];
+                imgPath = data[0]
                 // 裁剪头像
                 cropImageFile(data[0])
             }
