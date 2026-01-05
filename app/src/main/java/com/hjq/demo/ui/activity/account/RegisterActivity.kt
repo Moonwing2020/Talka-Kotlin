@@ -180,39 +180,39 @@ class RegisterActivity : AppActivity(), OnEditorActionListener {
             }
 
             // 提交注册
-            EasyHttp.post(this)
-                .api(RegisterApi().apply {
-                    setPhone(phoneView?.text.toString())
-                    setCode(codeView?.text.toString())
-                    setPassword(firstPassword?.text.toString())
-                })
-                .request(object : HttpCallbackProxy<HttpData<RegisterApi.Bean?>>(this) {
-
-                    override fun onHttpStart(api: IRequestApi) {
-                        commitView?.showProgress()
-                    }
-
-                    override fun onHttpEnd(api: IRequestApi) {
-                        // default implementation ignored
-                    }
-
-                    override fun onHttpSuccess(data: HttpData<RegisterApi.Bean?>) {
-                        postDelayed({
-                            commitView?.showSucceed()
-                            postDelayed({
-                                setResult(RESULT_OK, Intent()
-                                        .putExtra(INTENT_KEY_PHONE, phoneView?.text.toString())
-                                        .putExtra(INTENT_KEY_PASSWORD, firstPassword?.text.toString()))
-                                finish()
-                            }, 1000)
-                        }, 1000)
-                    }
-
-                    override fun onHttpFail(throwable: Throwable) {
-                        super.onHttpFail(throwable)
-                        postDelayed({ commitView?.showError(3000) }, 1000)
-                    }
-                })
+//            EasyHttp.post(this)
+//                .api(RegisterApi().apply {
+//                    setPhone(phoneView?.text.toString())
+//                    setCode(codeView?.text.toString())
+//                    setPassword(firstPassword?.text.toString())
+//                })
+//                .request(object : HttpCallbackProxy<HttpData<RegisterApi.Bean?>>(this) {
+//
+//                    override fun onHttpStart(api: IRequestApi) {
+//                        commitView?.showProgress()
+//                    }
+//
+//                    override fun onHttpEnd(api: IRequestApi) {
+//                        // default implementation ignored
+//                    }
+//
+//                    override fun onHttpSuccess(data: HttpData<RegisterApi.Bean?>) {
+//                        postDelayed({
+//                            commitView?.showSucceed()
+//                            postDelayed({
+//                                setResult(RESULT_OK, Intent()
+//                                        .putExtra(INTENT_KEY_PHONE, phoneView?.text.toString())
+//                                        .putExtra(INTENT_KEY_PASSWORD, firstPassword?.text.toString()))
+//                                finish()
+//                            }, 1000)
+//                        }, 1000)
+//                    }
+//
+//                    override fun onHttpFail(throwable: Throwable) {
+//                        super.onHttpFail(throwable)
+//                        postDelayed({ commitView?.showError(3000) }, 1000)
+//                    }
+//                })
         }
     }
 

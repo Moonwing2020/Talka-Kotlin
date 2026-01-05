@@ -11,28 +11,44 @@ import com.hjq.http.config.IRequestApi
 class RegisterApi : IRequestApi {
 
     override fun getApi(): String {
-        return "user/register"
+        return "api/registered"
     }
 
-    /** 手机号 */
-    private var phone: String? = null
+    //性别
+    private var sex: String? = null
+    //生日
+    private var birthday: Long? = 0
+    //昵称
+    private var nickname: String? = null
+    //头像
+    private var headimgurl: String? = null
+    //系统
+    private var system: String? = null
+    //谷歌账号
+    private var google_account: String? = null
 
-    /** 验证码 */
-    private var code: String? = null
-
-    /** 密码 */
-    private var password: String? = null
-
-    fun setPhone(phone: String?): RegisterApi = apply {
-        this.phone = phone
+    fun setSex(sex: String?):RegisterApi = apply {
+        this.sex = sex
     }
 
-    fun setCode(code: String?): RegisterApi = apply {
-        this.code = code
+    fun setBirthday(birthday: Long?): RegisterApi = apply {
+        this.birthday = birthday
     }
 
-    fun setPassword(password: String?): RegisterApi = apply {
-        this.password = password
+    fun setNickname(nickname: String?):RegisterApi = apply {
+        this.nickname = nickname
+    }
+
+    fun setHeadimgurl(headimgurl: String?):RegisterApi = apply {
+        this.headimgurl = headimgurl
+    }
+
+    fun setSystem(system: String?):RegisterApi = apply {
+        this.system = system
+    }
+
+    fun setGoogleAccount(googleAccount: String?):RegisterApi = apply {
+        this.google_account = googleAccount
     }
 
     class Bean {
