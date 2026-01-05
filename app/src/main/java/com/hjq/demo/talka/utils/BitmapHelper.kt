@@ -4,59 +4,17 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.graphics.Matrix
 import android.net.Uri
 import android.os.Environment
 import java.io.File
 import java.io.FileInputStream
 import java.io.FileOutputStream
 import java.io.IOException
-import java.io.InputStream
 import java.nio.channels.FileChannel
 import java.text.SimpleDateFormat
 import java.util.Date
 
 object BitmapHelper {
-    @SuppressLint("SimpleDateFormat")
-    fun createImageFile_(): Uri {
-        // Create an image file name
-        val timeStamp = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
-        val imageFileName = "JPEG_ " + timeStamp + "_"
-        val storageDir = Environment.getExternalStoragePublicDirectory(
-            Environment.DIRECTORY_PICTURES
-        )
-        var image: File? = null
-        try {
-            image = File.createTempFile(imageFileName, ".jpg")
-        } catch (e: IOException) {
-            e.printStackTrace()
-        }
-
-        // Save a file: path for use with ACTION_VIEW intents
-        return Uri.fromFile(image)
-    }
-
-    fun copyFileUsingFileChannels_(source: File?, dest: File?) {
-        var inputChannel: FileChannel? = null
-        var outputChannel: FileChannel? = null
-        try {
-            try {
-                inputChannel = FileInputStream(source).channel
-                outputChannel = FileOutputStream(dest).channel
-                outputChannel.transferFrom(inputChannel, 0, inputChannel.size())
-            } catch (e: IOException) {
-                e.printStackTrace()
-            }
-        } finally {
-            try {
-                inputChannel!!.close()
-                outputChannel!!.close()
-            } catch (e: IOException) {
-                e.printStackTrace()
-            }
-        }
-    }
-
     /**
      * 改造后最终版 scal 方法（核心）
      * 直接兼容：content://路径 + 本地路径，无报错、无未定义
